@@ -44,6 +44,34 @@
             context.Wait(this.MessageReceived);
         }
 
+        [LuisIntent("OrderChecks")]
+        public async Task OrderChecks(IDialogContext context, LuisResult result)
+        {
+            string message = "Got it. Your checks have been ordered.";
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
+
+        [LuisIntent("OpenAccount")]
+        public async Task OpenAccount(IDialogContext context, LuisResult result)
+        {
+            string message = "Okay, let's open a new account. Before we can open a new account i'll need to ask you some questions:";
+
+            await context.PostAsync(message);
+            try
+            {
+                context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
+            }
+            catch (TooManyAttemptsException ex)
+            {
+                await context.PostAsync($"Ooops! Too many attemps :(. But don't worry, I'm handling that exception and you can try again!");
+                context.Wait(this.MessageReceived);
+            }
+        }
+
+
         [LuisIntent("SearchHotels")]
         public async Task Search(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
         {
@@ -218,7 +246,7 @@
             return hotels;
         }
 
-        /*private async Task ResumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
+        private async Task ResumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
         {
             try
             {
@@ -233,7 +261,7 @@
                 context.Wait(this.MessageReceived);
             }
         }
-
+        /*
         [LuisIntent("OpenAccount")]
         private async Task NewAccount(IDialogContext context, LuisResult result)
         {

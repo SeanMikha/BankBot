@@ -8,7 +8,10 @@
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Builder.FormFlow;
     using Microsoft.Bot.Connector;
+    //using Microsoft.Bot.Builder.Luis;
+    //using Microsoft.Bot.Builder.Luis.Models;
 
+    //[LuisModel("5e4110b0-6f71-42ba-ad88-d04693909dab", "0437bfb8dd1d4cef8d9fef50776c739b")]
     [Serializable]
     public class OpenDialog : IDialog<object>
     {
