@@ -34,27 +34,14 @@
             context.Wait(this.MessageReceived);
         }
 
-        [LuisIntent("OpenAccount")]
-        private async Task NewAccount(IDialogContext context, LuisResult result)
+        [LuisIntent("Greetings")]
+        public async Task Greetings(IDialogContext context, LuisResult result)
         {
-            //string message = $"Okay let's open a new account.";
-            //context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
-            //await context.PostAsync(message);
-            //context.Wait(this.MessageReceived);
-            //context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
-            //await context.PostAsync("Okay let's open a new account.");
-            //context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
-            //context.Wait(this.MessageReceived);
-            try
-            {
-                context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
-            }
-            catch (TooManyAttemptsException ex)
-            {
-                await context.PostAsync($"Ooops! Too many attemps :(. But don't worry, I'm handling that exception and you can try again!");
+            string message = "Hello and welcome to eBank. How can I help you today?";
 
-                context.Wait(this.MessageReceived);
-            }
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
         }
 
         [LuisIntent("SearchHotels")]
@@ -231,7 +218,7 @@
             return hotels;
         }
 
-        private async Task ResumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
+        /*private async Task ResumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
         {
             try
             {
@@ -246,5 +233,28 @@
                 context.Wait(this.MessageReceived);
             }
         }
+
+        [LuisIntent("OpenAccount")]
+        private async Task NewAccount(IDialogContext context, LuisResult result)
+        {
+            string message = $"Okay let's open a new account.";
+            //context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
+            //await context.PostAsync(message);
+            context.Wait(this.MessageReceived);
+            //context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
+            //await context.PostAsync("Okay let's open a new account.");
+            //context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
+            context.Wait(this.MessageReceived);
+            /*try
+            {
+                context.Call(new OpenDialog(), this.ResumeAfterOptionDialog);
+            }
+            catch (TooManyAttemptsException ex)
+            {
+                await context.PostAsync($"Ooops! Too many attemps :(. But don't worry, I'm handling that exception and you can try again!");
+
+                context.Wait(this.MessageReceived);
+            }
+        }*/
     }
 }
