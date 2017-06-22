@@ -17,10 +17,6 @@
     {
         public async Task StartAsync(IDialogContext context)
         {
-            //context.Fail(new NotImplementedException("This Dialog is not implemented and is instead being used to show context.Fail"));
-
-            await context.PostAsync("Okay, let's open a new account.");
-
             var OpenFormDialog = FormDialog.FromForm(this.BuildOpenForm, FormOptions.PromptInStart);
 
             context.Call(OpenFormDialog, this.ResumeAfterOpenFormDialog);

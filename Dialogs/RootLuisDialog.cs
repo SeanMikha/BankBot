@@ -47,7 +47,7 @@
         [LuisIntent("OrderChecks")]
         public async Task OrderChecks(IDialogContext context, LuisResult result)
         {
-            string message = "Got it. Your checks have been ordered.";
+            string message = "Okay you want to order a new set of checks.";
 
             await context.PostAsync(message);
 

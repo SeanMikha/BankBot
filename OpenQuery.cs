@@ -6,14 +6,17 @@
     [Serializable]
     public class OpenQuery
     {
+
+        [Pattern("[A-Za-z]{1,50} +[A-Za-z]{1,50}")]
         [Prompt("What is your full name?")]
         public string Name { get; set; }
 
-        [Prompt("What type of account would like to open (checking, savings)?")]
+        [Pattern("deposits?|loans?")]
+        [Prompt("What type of account would like to open (deposit, loan)?")]
         public string AccountType { get; set; }
-
-        [Numeric(1, int.MaxValue)]
+        
+        [Pattern("[0-9]{9,10}|[0-9]?[- ]*\\(*[0-9]{3}\\)*[- ]*[0-9]{3}[- ]*[0-9]{4}")]
         [Prompt("What is your phone number?")]
-        public int PhoneNum { get; set; }
+        public string PhoneNum { get; set; }
     }
 }
